@@ -2,21 +2,32 @@
   <div class="hello">
     <h1>{{ msg }}</h1>
     <div v-on:click="changeValue">ここをクリック</div>
+    <div v-for="article in articles" :key="article.id">
+      <CardComponent
+        :id="article.id" 
+        :title="article.title" 
+        :image="article.image" 
+        :description="article.description"
+      />
+    </div>
   </div>
 </template>
 
 <script>
-export default {
-  name: 'HelloWorld',
-  props: {
-    msg: String
-  },
-  methods:{
-    changeValue: function(){
-      this.$emit("changeValue", "裏Vueへようこそ。新しいVueが始まる。。。");
-    }
-  }
+import CardComponent from "./CardComponent.vue";
 
+export default {
+    name: "HelloWorld",
+    props: {
+        msg: String,
+        articles: Object
+    },
+    methods: {
+        changeValue: function () {
+            this.$emit("changeValue", "裏Vueへようこそ。新しいVueが始まる。。。");
+        }
+    },
+    components: { CardComponent }
 }
 </script>
 
